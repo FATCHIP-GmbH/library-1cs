@@ -51,16 +51,6 @@ class CTPaymentMethods
                 //'countries' => ['DE', 'NL', 'DK', 'FI', 'SE', 'NO'],
             ],
             [
-                'name' => 'fatchip_firstcash_klarna_pay_now',
-                'shortname' => 'Klarna Pay now',
-                'description' => 'First Cash Solution Klarna Pay now',
-                'action' => 'FatchipFCSKlarnaPayments',
-                'template' => 'fatchip_firstcash_klarna_pay_now.tpl',
-                'additionalDescription' => '',
-                'className' => 'KlarnaPayments',
-                //'countries' => ['DE', 'NL', 'DK', 'FI', 'SE', 'NO'],
-            ],
-            [
                 'name' => 'fatchip_firstcash_klarna_pay_later',
                 'shortname' => 'Klarna Pay later',
                 'description' => 'First Cash Solution Klarna Pay later',
