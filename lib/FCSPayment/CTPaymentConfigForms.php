@@ -273,6 +273,28 @@ class CTPaymentConfigForms
                                   Bei einer angeforderten Kontoverifizierung ist der übermittelte Betrag optional und <BR>
                                   wird für die tatsächliche Zahlungstransaktion ignoriert (z.B. Autorisierung).',
             ],
+            'creditCardSilentModeBrandDetection' => [
+                'name' => 'creditCardSilentModeBrandDetection',
+                'type' => 'select',
+                'value' => 0,
+                'label' => 'Kreditkarte - Silent Mode Kartentyp Autoerkennung ',
+                'required' => false,
+                'editable' => false,
+                'store' =>
+                    [
+                        [0, [
+                            'de_DE' => 'inaktiv',
+                            'en_GB' => 'disabled',
+                            'fr_FR' => 'désactivé',
+                        ]],
+                        [1, [
+                            'de_DE' => 'aktiv',
+                            'en_GB' => 'enabled',
+                            'fr_FR' => 'activé',
+                        ]],
+                    ],
+                'description' => 'Wählt anhand der eingebenen Kartennummer automatisch den Karten Typ und zeigt das Kartenlogo an.<BR>',
+            ],
         ];
 
     const formCreditCardNumberElements =
@@ -721,7 +743,8 @@ class CTPaymentConfigForms
                 'creditCardMode' => [
                     'label' => 'Kreditkarte - Modus',
                     'description' => '<b>IFrame</b>: Kreditkartendaten werden nach klick auf "Zahlungsplichtig bestellen" in ein IFrame eingegeben<BR>
-                                  <b>Silent Mode</b>: Kreditkartendaten werden auf der Seite "Prüfen und Bestellen" eingegeben.<BR>',
+                                  <b>Silent Mode</b>: Kreditkartendaten werden auf der Seite "Prüfen und Bestellen" eingegeben.<BR>
+								  <b>Payment Page</b>: Kreditkartendaten werden nach klick auf "Zahlungsplichtig bestellen" in einem blanken Fenster eingegeben<BR>',
                 ],
                 'creditCardTestMode' => [
                     'label' => 'Kreditkarte - Test-Modus',
@@ -756,6 +779,10 @@ class CTPaymentConfigForms
                     'description' => 'Indikator für Anforderung einer Kontoverifizierung (alias Nullwert-Authorisierung). <BR>
                                   Bei einer angeforderten Kontoverifizierung ist der übermittelte Betrag optional und <BR>
                                   wird für die tatsächliche Zahlungstransaktion ignoriert (z.B. Autorisierung).',
+                ],
+                'creditCardSilentModeBrandDetection' => [
+                    'label' => 'Kreditkarte - Silent Mode Kartentyp Autoerkennung',
+                    'description' => 'Wählt anhand der eingebenen Kartennummer automatisch den Karten Typ und zeigt das Kartenlogo an.<BR>',
                 ],
                 'creditCardTemplate' => [
                     'label' => 'Kreditkarte - Template Name',
@@ -892,7 +919,8 @@ class CTPaymentConfigForms
                 'creditCardMode' => [
                     'label' => 'Creditcard - Mode',
                     'description' => '<b>IFrame</b>: The creditcard form will be displayed after clicking "confirm payment" in an iframe<BR>
-                                  <b>Silent Mode</b>: The creditcard form will be displayed on the "complete order" page.<BR>',
+                                  <b>Silent Mode</b>: The creditcard form will be displayed on the "complete order" page.<BR>
+                                  <b>Payment Page</b>: Credit card details are entered in a blank page after clicking on "Order payment".',
                 ],
                 'creditCardTestMode' => [
                     'label' => 'Creditcard - Testmode',
@@ -926,6 +954,10 @@ class CTPaymentConfigForms
                     'description' => 'Indicator for an account verification request (alias Null-Auth).<BR>
                                   By using an account verification request the amount is optional and<BR>
                                   will be ignored for the real payment (E.g. authorization).',
+                ],
+                'creditCardSilentModeBrandDetection' => [
+                    'label' => 'Creditcard - Silent Mode card type autodetection',
+                    'description' => 'Chooses automatically the card type when entering the creditcard number and shows the creditcard logo.<BR>',
                 ],
                 'creditCardTemplate' => [
                     'label' => 'Creditcard - Template name',
@@ -1062,7 +1094,8 @@ class CTPaymentConfigForms
                 'creditCardMode' => [
                     'label' => 'Carte de crédit - Mode',
                     'description' => '<b>IFrame</b>: Le formulaire sera affiché après avoir cliqué sur "Confirmer le paiement" dans un iframe<BR>
-                                  <b>Mode silencieux</b>: Le formulaire sera affiché sur la page "Vérifier et Commander".<BR>',
+                                  <b>Mode silencieux</b>: Le formulaire sera affiché sur la page "Vérifier et Commander".<BR>
+                                  <b>Payment Page</b>: Les coordonnées de la carte de crédit sont saisies dans une fenêtre vierge après avoir cliqué sur "Commande avec obligation de paiement".',
                 ],
                 'creditCardTestMode' => [
                     'label' => 'Carte de crédit - Mode test',
@@ -1096,6 +1129,10 @@ class CTPaymentConfigForms
                     'description' => 'Indicateur pour une requête de vérification de compte (alias Null-Auth).<BR>
                                   En utilisant une demande de vérification de compte, le montant est<BR>
                                   facultatif et sera ignoré pour le paiement réel (Exemple, autorisation).',
+                ],
+                'creditCardSilentModeBrandDetection' => [
+                    'label' => 'Carte de crédit - Mode silencieux détection automatique du type de carte',
+                    'description' => 'Choisit automatiquement le type de carte lors de la saisie du numéro, et affiche le logo de la carte de crédit.<BR>',
                 ],
                 'creditCardTemplate' => [
                     'label' => 'Carte de crédit - Nom du modèle',
