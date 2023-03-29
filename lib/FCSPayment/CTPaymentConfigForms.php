@@ -53,7 +53,7 @@ class CTPaymentConfigForms
                 'name' => 'blowfishPassword',
                 'type' => 'text',
                 'value' => '',
-                'label' => 'Blowfish Password',
+                'label' => 'Passwort',
                 'required' => true,
                 'description' => 'Ihr Verschlüsselungs-Passwort',
             ],
@@ -104,6 +104,31 @@ class CTPaymentConfigForms
                     ],
                 'description' => 'Erzeugt eine Log Datei <FatchipFCSPayment_.log> mit Debug Ausgaben im Shopware Protokollverzeichnis.<BR>',
            ],
+            'encryption' => [
+                'name' => 'encryption',
+                'type' => 'select',
+                'value' => 'blowfish',
+                'label' => 'Verschlüsselung',
+                'required' => true,
+                'editable' => false,
+                'store' =>
+                    [
+                        ['blowfish', [
+                            'de_DE' => 'Blowfish Verschlüsselung (Standard)',
+                            'en_GB' => 'Blowfish encyption (default)',
+                            'fr_FR' => 'Blowfish chiffrement (défaut)',
+                        ]],
+                        ['aes', [
+                            'de_DE' => 'AES Verschlüsselung',
+                            'en_GB' => 'AES encyption',
+                            'fr_FR' => 'AES chiffrement',
+                        ]],
+                    ],
+                'description' => 'Art der verwendeten Verschlüsselung.<BR>
+                                  Blowfish Verschlüsselung wird vom First Cash Support als Standard eingerichtet.<BR>
+                                  Sollte die Blowfish Verschlüsselung (bf-cbc) bei Ihrem Hoster nicht verfügbar sein, wenden Sie sich bitte an den First Cash Support und lassen Sie AES aufschalten.<BR>
+                                  Wenn seitens First Cash AES aktiviert wurde, stellen Sie auf AES um und führen den API Test durch.',
+            ],
         ];
 
     const formCreditCardSelectElements =
@@ -570,7 +595,7 @@ class CTPaymentConfigForms
                 'name' => 'amazonButtonType',
                 'type' => 'select',
                 'value' => 'PwA',
-                'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_TYPE_PARAMETER" rel="noopener" target="_blank">AmazonPay - Button Typ</a>',
+                'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_TYPE_PARAMETER" target="_blank" rel="noopener" >AmazonPay - Button Typ</a>',
                 'required' => false,
                 'editable' => false,
                 'store' =>
@@ -589,7 +614,7 @@ class CTPaymentConfigForms
                 'name' => 'amazonButtonColor',
                 'type' => 'select',
                 'value' => 'Gold',
-                'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_COLOR_PARAMETER" rel="noopener" target="_blank">AmazonPay - Button Farbe</a>',
+                'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_COLOR_PARAMETER" target="_blank" rel="noopener" >AmazonPay - Button Farbe</a>',
                 'required' => 'true',
                 'editable' => false,
                 'store' =>
@@ -606,7 +631,7 @@ class CTPaymentConfigForms
                 'name' => 'amazonButtonSize',
                 'type' => 'select',
                 'value' => 'medium',
-                'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_SIZE_PARAMETER" rel="noopener" target="_blank">AmazonPay - Button Größe</a>',
+                'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_SIZE_PARAMETER" target="_blank" rel="noopener" >AmazonPay - Button Größe</a>',
                 'required' => 'true',
                 'editable' => false,
                 'store' =>
@@ -719,7 +744,7 @@ class CTPaymentConfigForms
                     'description' => 'Ihr HMAC-Key',
                 ],
                 'blowfishPassword' => [
-                    'label' => 'Blowfish Password',
+                    'label' => 'Passwort',
                     'description' => 'Ihr Verschlüsselungs-Passwort',
                 ],
                 'fatchip_firstcash_apitest_button' => [
@@ -739,6 +764,13 @@ class CTPaymentConfigForms
                 'debuglog' => [
                     'label' => 'Debug Protokoll',
                     'description' => 'Erzeugt eine Log Datei <FatchipFCSPayment_.log> mit Debug Ausgaben im Shopware Protokollverzeichnis',
+                ],
+                'encryption' => [
+                    'label' => 'Verschlüsselung',
+                    'description' => 'Art der verwendeten Verschlüsselung.<BR>
+                                  Blowfish Verschlüsselung wird vom First Cash Solution Support als Standard eingerichtet.<BR>
+                                  Sollte die Blowfish Verschlüsselung (bf-cbc) bei Ihrem Hoster nicht verfügbar sein, wenden Sie sich bitte an den First Cash Solution Support und lassen Sie AES aufschalten.<BR>
+                                  Wenn seitens First Cash AES aktiviert wurde, stellen Sie auf AES um und führen den API Test durch.',
                 ],
                 'creditCardMode' => [
                     'label' => 'Kreditkarte - Modus',
@@ -775,7 +807,7 @@ class CTPaymentConfigForms
                                   <b>Omnipay</b>: EMS payment solutions, Global Payments, Paysquare',
                 ],
                 'creditCardAccVerify' => [
-                    'label' => 'Kreditkarte - Kontoverifizierung anfordern ',
+                    'label' => 'Kreditkarte - Kontoverifizierung anfordern',
                     'description' => 'Indikator für Anforderung einer Kontoverifizierung (alias Nullwert-Authorisierung). <BR>
                                   Bei einer angeforderten Kontoverifizierung ist der übermittelte Betrag optional und <BR>
                                   wird für die tatsächliche Zahlungstransaktion ignoriert (z.B. Autorisierung).',
@@ -841,19 +873,19 @@ class CTPaymentConfigForms
                                   <b>Manuell</b>: Geldeinzüge werden von Ihnen manuell im Shopbackend durchgeführt.',
                 ],
                 'amazonButtonType' => [
-                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_TYPE_PARAMETER" rel="noopener" target="_blank">AmazonPay - Button Typ</a>',
+                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_TYPE_PARAMETER" target="_blank" rel="noopener" >AmazonPay - Button Typ</a>',
                     'description' => 'Typ des Amazon Buttons<BR>
                                   Das Aussehen der verschiedenen Buttons.<BR>
                                   Klicken Sie links auf den Link "AmazonPay - Button Typ"',
                 ],
                 'amazonButtonColor' => [
-                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_COLOR_PARAMETER" rel="noopener" target="_blank">AmazonPay - Button Farbe</a>',
+                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_COLOR_PARAMETER" target="_blank" rel="noopener" >AmazonPay - Button Farbe</a>',
                     'description' => 'Farbe des Amazon Buttons<BR>
                                   Das Aussehen der verschiedenen Buttons.<BR>
                                   Klicken Sie links auf den Link "AmazonPay - Button Farbe"',
                 ],
                 'amazonButtonSize' => [
-                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_SIZE_PARAMETER" rel="noopener" target="_blank">AmazonPay - Button Größe</a>',
+                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_SIZE_PARAMETER" target="_blank" rel="noopener" >AmazonPay - Button Größe</a>',
                     'description' => 'Größe des Amazon Buttons<BR>
                                   Das Aussehen der verschiedenen Buttons.<BR>
                                   Klicken Sie links auf den Link "AmazonPay - Button Größe"',
@@ -895,8 +927,8 @@ class CTPaymentConfigForms
                     'description' => 'Your HMAC-Key',
                 ],
                 'blowfishPassword' => [
-                    'label' => 'Blowfish Password',
-                    'description' => 'Your blowfish password',
+                    'label' => 'Password',
+                    'description' => 'Your encryption password',
                 ],
                 'fatchip_firstcash_apitest_button' => [
                     'label' => '<strong>test API credentials (Save and clear cache first)<strong>',
@@ -915,6 +947,12 @@ class CTPaymentConfigForms
                 'debuglog' => [
                     'label' => 'Debug protocol',
                     'description' => 'Creates a log file <FatchipFCSPayment_.log> with debugging output on the shopware log folder',
+                ],
+                'encryption' => [
+                    'label' => 'Encyption',
+                    'description' => 'Type of encryption used.<br>
+                                  Blowfish encryption is set up by First Cash Solution Support as a standard. If Blowfish encryption (bf-cbc) is not available from your hoster, please contact First Cash Solution Support and have AES activated.<BR>
+                                  If First Cash has activated AES, switch to AES and run the API test.',
                 ],
                 'creditCardMode' => [
                     'label' => 'Creditcard - Mode',
@@ -992,7 +1030,7 @@ class CTPaymentConfigForms
                 'paypalCaption' => [
                     'label' => 'Paypal - Capture Modus',
                     'description' => 'capture reserverd amounts now or manually later. <br>
-                                  <b>Important:<br>Please contact the computop customer support before using the manual setting to clarify possible use cases .</b>',
+                                  <b>Important:<br>Please contact the First Cash Solution customer support before using the manual setting to clarify possible use cases .</b>',
                 ],
                 'paypalSetOrderStatus' => [
                     'label' => 'Paypal - Order status on captures',
@@ -1016,19 +1054,19 @@ class CTPaymentConfigForms
                                   <b>MANUAL</b>: Reserverd amounts have to be captured manuelly in the shop backend.',
                 ],
                 'amazonButtonType' => [
-                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_TYPE_PARAMETER" rel="noopener" target="_blank">AmazonPay - Button Type</a>',
+                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_TYPE_PARAMETER" target="_blank" rel="noopener">AmazonPay - Button Type</a>',
                     'description' => 'Type of the Amazon button<BR>
                                   The look of the different buttons.<BR>
                                   Please click on the left link "AmazonPay - Button Type"',
                 ],
                 'amazonButtonColor' => [
-                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_COLOR_PARAMETER" rel="noopener" target="_blank">AmazonPay - Button Color</a>',
+                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_COLOR_PARAMETER" target="_blank" rel="noopener">AmazonPay - Button Color</a>',
                     'description' => 'Color of the Amazon button<BR>
                                   The look of the different button.<BR>
                                   Please click on the left link "AmazonPay - Button Color"',
                 ],
                 'amazonButtonSize' => [
-                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_SIZE_PARAMETER" rel="noopener" target="_blank">AmazonPay - Button Size</a>',
+                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_SIZE_PARAMETER" target="_blank" rel="noopener">AmazonPay - Button Size</a>',
                     'description' => 'Size of the amazon button<BR>
                                   The look of the different button.<BR>
                                   Please click on the left link "AmazonPay - Button Size"',
@@ -1071,7 +1109,7 @@ class CTPaymentConfigForms
                 ],
                 'blowfishPassword' => [
                     'label' => 'Mot de passe Blowfish',
-                    'description' => 'Votre mot de passe Blowfish',
+                    'description' => 'Votre mot de passe de cryptage',
                 ],
                 'fatchip_firstcash_apitest_button' => [
                     'label' => '<strong>Tester les données d`accès API (Enregistrer d`abord et vider le cache)<strong>',
@@ -1090,6 +1128,12 @@ class CTPaymentConfigForms
                 'debuglog' => [
                     'label' => 'Journalisation de déboggage',
                     'description' => 'Créer un journal <FatchipFCSPayment_.log> avec les traces de déboggage dans le dossier de journaux de shopware',
+                ],
+                'encryption' => [
+                    'label' => 'Chiffrement',
+                    'description' => 'Type de chiffrement utilisé.<br>
+                                  Le chiffrement Blowfish est défini comme standard par le support First Cash Solution. Si le chiffrement Blowfish (bf-cbc) n\'est pas disponible chez votre hébergeur, veuillez contacter le support First Cash Solution and activer AES.<BR>
+                                  Si First Cash a activé AES, basculez vers AES et executez le test de l\'API.',
                 ],
                 'creditCardMode' => [
                     'label' => 'Carte de crédit - Mode',
@@ -1168,7 +1212,7 @@ class CTPaymentConfigForms
                 'paypalCaption' => [
                     'label' => 'Paypal - Mode de débit',
                     'description' => 'Les montants réservés seront débités maintenant ou manuellement plus tard. <br>
-                                  <b>Important:<br>Veuillez contacter le service client computop avant d\'utiliser le paramètre manuel, pour clarifier les possibles cas d\'usage.</b>',
+                                  <b>Important:<br>Veuillez contacter le service client First Cash avant d\'utiliser le paramètre manuel, pour clarifier les possibles cas d\'usage.</b>',
                 ],
                 'paypalSetOrderStatus' => [
                     'label' => 'Paypal - Statut de la commande sur les débits',
@@ -1192,19 +1236,19 @@ class CTPaymentConfigForms
                                   <b>MANUEL</b>: Les montants réservés doivent être débités manuellement via l\'administration de la boutique.',
                 ],
                 'amazonButtonType' => [
-                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_TYPE_PARAMETER" rel="noopener" target="_blank">AmazonPay - Type de bouton</a>',
+                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_TYPE_PARAMETER" target="_blank" rel="noopener" >AmazonPay - Type de bouton</a>',
                     'description' => 'Type du bouton Amazon<BR>
                                   L\'aspect des différents boutons.<BR>
                                   Veuillez cliquer sur le lien à gauche "AmazonPay - Type de bouton"',
                 ],
                 'amazonButtonColor' => [
-                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_COLOR_PARAMETER" rel="noopener" target="_blank">AmazonPay - Couleur de bouton</a>',
+                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_COLOR_PARAMETER" target="_blank" rel="noopener" >AmazonPay - Couleur de bouton</a>',
                     'description' => 'Couleur du bouton Amazon<BR>
                                   L\'aspect des différents boutons.<BR>
                                   Veuillez cliquer sur le lien à gauche "AmazonPay - Couleur de bouton"',
                 ],
                 'amazonButtonSize' => [
-                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_SIZE_PARAMETER" rel="noopener" target="_blank">AmazonPay - Taille de bouton</a>',
+                    'label' => '<a href="https://pay.amazon.com/de/developer/documentation/lpwa/201952050#ENTER_SIZE_PARAMETER" target="_blank" rel="noopener" >AmazonPay - Taille de bouton</a>',
                     'description' => 'Taille du bouton Amazon<BR>
                                   L\'aspect des différents boutons.<BR>
                                   Veuillez cliquer sur le lien à gauche "AmazonPay - Taille de bouton"',
