@@ -121,7 +121,7 @@ class CTAPITestService extends Encryption
         $len = mb_strlen($request);  // Length of the plain text string
 
         // Test if encryption is supported
-        $plugin = Shopware()->Plugins()->Frontend()->FatchipCTPayment();
+        $plugin = Shopware()->Plugins()->Frontend()->FatchipFCSPayment();
         $plugin->checkOpenSSLSupport();
 
         $data = $this->ctEncrypt($request, $len, $this->getBlowfishPassword(), $this->encryption);
