@@ -30,7 +30,7 @@ namespace Fatchip\FCSPayment;
  * Class Encryption
  * @package Fatchip\FCSPayment
  */
-class Envryption
+class Encryption
 {
 
     const blowfishCipher = 'bf-ecb';
