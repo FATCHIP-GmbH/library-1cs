@@ -77,6 +77,7 @@ abstract class CTPaymentMethod extends Encryption
         $this->merchantID = $this->config['merchantID'];
         $this->blowfishPassword = $this->config['blowfishPassword'];
         $this->mac = $this->config['mac'];
+        $this->encryption = $this->config['encryption'];
 
         $this->utils = Shopware()->Container()->get('FatchipFCSPaymentUtils');
     }
