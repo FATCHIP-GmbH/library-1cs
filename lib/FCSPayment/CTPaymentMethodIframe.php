@@ -95,6 +95,14 @@ abstract class CTPaymentMethodIframe extends CTPaymentMethod
     protected $urlNotify;
 
     /**
+     * Vollständige URL, die das Paygate aufruft, wenn der Kunde auf Abbruch klickt.
+     *
+     *
+     * @var string
+     */
+    protected $urlBack;
+
+    /**
      * Beschreibung der gekauften Waren, Einzelpreise etc.
      *
      * @var string
@@ -443,6 +451,24 @@ abstract class CTPaymentMethodIframe extends CTPaymentMethod
         return $this->urlFailure;
     }
 
+
+    /**
+     * @ignore <description>
+     * @param string $urlBack
+     */
+    public function setUrlBack($urlBack)
+    {
+        $this->urlBack = $urlBack;
+    }
+
+    /**
+     * @ignore <description>
+     * @return string
+     */
+    public function getUrlBack()
+    {
+        return $this->urlBack;
+    }
 
     /**
      * @ignore <description>
