@@ -91,9 +91,9 @@ class CTPaymentMethods
                 //'countries' => ['DE', 'NL', 'DK', 'FI', 'SE', 'NO'],
             ],
             [
-                'name' => 'fatchip_firstcash_paydirekt',
-                'shortname' => 'Paydirekt',
-                'description' => 'First Cash Solution Paydirekt',
+                'name' => 'fatchip_firstcash_giropay',
+                'shortname' => 'Giropay',
+                'description' => 'First Cash Solution Giropay',
                 'action' => 'FatchipFCSPaydirekt',
                 'template' => '',
                 'additionalDescription' => '',
